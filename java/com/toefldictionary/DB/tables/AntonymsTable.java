@@ -1,0 +1,14 @@
+package com.toefldictionary.DB.tables;
+
+/**
+ * Created by Gor on 02-May-16.
+ */
+public class AntonymsTable {
+    public static final String TABLE_NAME = "antonyms";
+    public static final String COLUMN_WORD_ID = "antonym1_id";
+    public static final String COLUMN_ANTONYM_ID = "antonym2_id";
+
+    public static final String CREATE_TABLE = "create table " + TABLE_NAME +
+            "(" + COLUMN_WORD_ID + " integer, "
+            + COLUMN_ANTONYM_ID + " integer " + ");";
+}

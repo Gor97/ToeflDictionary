@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_mywords"
+            android:icon="@drawable/ic_subject_black_24dp"
+            android:title="My Words" />
+        <item
+            android:id="@+id/nav_quiz"
+            android:icon="@drawable/ic_check_black_24dp"
+            android:title="Quiz" />
+        <item
+            android:id="@+id/nav_blacklist"
+            android:icon="@drawable/ic_highlight_off_black_24dp"
+            android:title="BlackList" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+        </menu>
+    </item>
+
+</menu>
