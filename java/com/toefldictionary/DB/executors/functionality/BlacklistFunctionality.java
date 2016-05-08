@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 public interface BlacklistFunctionality {
     void addBlacklistWord(Word w);
-    void deleteBlacklistWord(Word w);
+    void deleteBlacklistWord(int id);
     ArrayList<Word> getAllBlacklistWords();
 }

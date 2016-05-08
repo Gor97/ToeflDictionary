@@ -5,7 +5,7 @@ package com.toefldictionary.DB.tables;
  */
 public class WordsTable {
     public static final String TABLE_NAME = "words";
-    public static final String COLUMN_ID = "word_id";
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_WORD = "word";
     public static final String COLUMN_TRANSLATION = "translation";
 

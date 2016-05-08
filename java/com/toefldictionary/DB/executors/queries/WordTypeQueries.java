@@ -69,13 +69,15 @@ public class WordTypeQueries implements WordTypeFunctionality {
             if (cursor.getInt(1) == id) {
                 int neededID = cursor.getInt(0);
                 Word w = new Word();
-                Cursor c = database.rawQuery("select * from " + WordsTable.TABLE_NAME + " where " + WordsTable.COLUMN_ID + " = " + neededID, null);
+                Cursor c = database.rawQuery("select * from " + WordsTable.TABLE_NAME + " inner join " + WordTypeTable.TABLE_NAME + " on " + WordsTable.COLUMN_ID + " = " + neededID, null);
+                c.moveToFirst();
                 w.setId(c.getInt(0));
                 w.setName(c.getString(1));
                 w.setTranslation(c.getString(2));
+                words.add(w);
                 c.close();
-                cursor.moveToNext();
             }
+            cursor.moveToNext();
         }
         cursor.close();
         return words;

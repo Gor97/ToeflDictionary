@@ -52,17 +52,18 @@ public class TypeQueries implements TypeFunctionality {
     }
 
     @Override
-    public Type editType(Type type) {
-        return null;
-    }
-
-    @Override
-    public void deleteType(int id) {
-
-    }
-
-    @Override
     public ArrayList<Type> getAllTypes() {
-        return null;
+        ArrayList<Type> types = new ArrayList<>();
+        Cursor cursor = database.query(TypesTable.TABLE_NAME,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Type t = cursorToType(cursor);
+            types.add(t);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return types;
     }
 }

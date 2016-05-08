@@ -2,7 +2,8 @@ package com.toefldictionary.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,10 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.toefldictionary.CardViewAdapter;
 import com.toefldictionary.DB.TOEFL_DB;
 import com.toefldictionary.DB.executors.FirstWords;
-import com.toefldictionary.DB.executors.objects.Description;
-import com.toefldictionary.DB.executors.objects.Type;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.R;
 
@@ -27,18 +27,29 @@ public class StartingPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ArrayList<Word> words;
     private TOEFL_DB db;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_page); // bacec normal bayc problem@ stuc cher skse
+        setContentView(R.layout.activity_starting_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         db = TOEFL_DB.getInstance(this);
+
         if(db.getAllWords() == null || db.getAllWords().size() == 0) {
             FirstWords.addingFirstWords(this);
         }
 
+        words = db.getAllWordByType(1);
+     //   Log.e("TOEFL", db.getAllSynonymsByWord(7).toString());
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new CardViewAdapter(words);
+        recyclerView.setAdapter(adapter);
+   //     Log.e("TOEFL", db.getAllWordByType(2).toString());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
 
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {

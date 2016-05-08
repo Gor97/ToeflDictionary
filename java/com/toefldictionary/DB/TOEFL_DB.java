@@ -2,34 +2,33 @@ package com.toefldictionary.DB;
 
 import android.content.Context;
 import java.util.ArrayList;
-import com.toefldictionary.DB.executors.functionality.AntonymFunctionality;
+
+import com.toefldictionary.DB.executors.functionality.WordAntonymFunctionality;
 import com.toefldictionary.DB.executors.functionality.DescriptionFunctionality;
-import com.toefldictionary.DB.executors.functionality.SynonymFunctionality;
+import com.toefldictionary.DB.executors.functionality.WordSynonymFunctionality;
 import com.toefldictionary.DB.executors.functionality.TypeFunctionality;
 import com.toefldictionary.DB.executors.functionality.WordDescriptionFunctionality;
 import com.toefldictionary.DB.executors.functionality.WordFunctionality;
 import com.toefldictionary.DB.executors.functionality.WordTypeFunctionality;
 import com.toefldictionary.DB.executors.objects.Description;
 import com.toefldictionary.DB.executors.objects.Type;
-import com.toefldictionary.DB.executors.queries.AntonymQueries;
+import com.toefldictionary.DB.executors.queries.WordAntonymQueries;
 import com.toefldictionary.DB.executors.queries.DescriptionQueries;
-import com.toefldictionary.DB.executors.queries.SynonymQueries;
+import com.toefldictionary.DB.executors.queries.WordSynonymQueries;
 import com.toefldictionary.DB.executors.queries.TypeQueries;
 import com.toefldictionary.DB.executors.queries.WordDescriptionQueries;
 import com.toefldictionary.DB.executors.queries.WordQueries;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.DB.executors.queries.WordTypeQueries;
 
-import java.util.ArrayList;
-
 /**
  * Created by Gor on 26-Apr-16.
  */
-public class TOEFL_DB implements WordFunctionality, SynonymFunctionality, AntonymFunctionality, DescriptionFunctionality,
+public class TOEFL_DB implements WordFunctionality, WordSynonymFunctionality, WordAntonymFunctionality, DescriptionFunctionality,
         TypeFunctionality, WordTypeFunctionality, WordDescriptionFunctionality{
     private static WordQueries w_q;
-    private static SynonymQueries s_q;
-    private static AntonymQueries a_q;
+    private static WordSynonymQueries s_q;
+    private static WordAntonymQueries a_q;
     private static DescriptionQueries d_q;
     private static TypeQueries t_q;
     private static WordTypeQueries wt_q;
@@ -39,8 +38,8 @@ public class TOEFL_DB implements WordFunctionality, SynonymFunctionality, Antony
 
     private TOEFL_DB(Context context) {
         w_q = new WordQueries(context);
-        s_q = new SynonymQueries(context);
-        a_q = new AntonymQueries(context);
+        s_q = new WordSynonymQueries(context);
+        a_q = new WordAntonymQueries(context);
         d_q = new DescriptionQueries(context);
         t_q = new TypeQueries(context);
         wt_q = new WordTypeQueries(context);
@@ -87,42 +86,46 @@ public class TOEFL_DB implements WordFunctionality, SynonymFunctionality, Antony
     }
 
     @Override
-    public void addSynonym(int id1, int id2) {
+    public void addWordSynonym(int id1, int id2) {
         s_q.open();
-        s_q.addSynonym(id1, id2);
+        s_q.addWordSynonym(id1, id2);
         s_q.close();
     }
 
     @Override
-    public void deleteSynonym(int id) {
+    public void deleteWordSynonym(int id) {
         s_q.open();
-        s_q.deleteSynonym(id);
+        s_q.deleteWordSynonym(id);
         s_q.close();
     }
-
-    //************************
-
-    // FOR TESTING
-
-    public ArrayList<Integer> getSynonyms() {
+    @Override
+    public ArrayList<Word> getAllSynonymsByWord(int id) {
         s_q.open();
-        ArrayList a = s_q.getSynonyms();
+        ArrayList<Word> a = s_q.getAllSynonymsByWord(id);
         s_q.close();
         return a;
     }
-    //********************
+
     @Override
-    public void addAntonym(int id1, int id2) {
+    public void addWordAntonym(int id1, int id2) {
         a_q.open();
-        a_q.addAntonym(id1,id2);
+        a_q.addWordAntonym(id1,id2);
         a_q.close();
     }
 
     @Override
-    public void deleteAntonym(int id) {
+    public void deleteWordAntonym(int id) {
         a_q.open();
-        a_q.deleteAntonym(id);
+        a_q.deleteWordAntonym(id);
         a_q.close();
+    }
+    @Override
+    public ArrayList<Word> getAllAntonymsByWord(int id)
+    {
+        a_q.open();
+        ArrayList<Word> a = a_q.getAllAntonymsByWord(id);
+        a_q.close();
+        return a;
     }
 
     @Override
@@ -154,21 +157,6 @@ public class TOEFL_DB implements WordFunctionality, SynonymFunctionality, Antony
         Type t = t_q.addType(type);
         t_q.close();
         return t;
-    }
-
-    @Override
-    public Type editType(Type type) {
-        t_q.open();
-        Type t = t_q.editType(type);
-        t_q.close();
-        return t;
-    }
-
-    @Override
-    public void deleteType(int id) {
-        t_q.open();
-        t_q.deleteType(id);
-        t_q.close();
     }
 
     @Override

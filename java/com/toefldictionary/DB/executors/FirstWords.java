@@ -1,38 +1,1 @@
-package com.toefldictionary.DB.executors;
-
-import android.content.Context;
-
-import com.toefldictionary.DB.TOEFL_DB;
-import com.toefldictionary.DB.executors.objects.Word;
-
-/**
- * Created by Gor on 01-May-16.
- */
-public class FirstWords {
-    public static void addingFirstWords(Context context)
-    {
-        TOEFL_DB db = TOEFL_DB.getInstance(context);
-        Word w = new Word("abandon", "թողնել");
-        db.addWord(w);
-        w = new Word("adversely", "բացասաբար");
-        db.addWord(w);
-        w = new Word("aggregate", "ժողովել");
-        db.addWord(w);
-        w = new Word("cultivation", "աճեցում");
-        db.addWord(w);
-        w = new Word("fertilize", "պարարտացնել");
-        db.addWord(w);
-        w = new Word("intensify", "ուժեղացնել");
-        db.addWord(w);
-        w = new Word("irrigation", "ոռոգում");
-        db.addWord(w);
-        w = new Word("obtain", "ստանալ");
-        db.addWord(w);
-        w = new Word("photosynthesis", "Ֆոտոսինթեզ");
-        db.addWord(w);
-        w = new Word("precipitation", "Երկրին հասնող ջուր");
-        db.addWord(w);
-
-
-    }
-}
+package com.toefldictionary.DB.executors;import android.content.Context;import com.toefldictionary.DB.TOEFL_DB;import com.toefldictionary.DB.executors.objects.Type;import com.toefldictionary.DB.executors.objects.Word;/** * Created by Gor on 01-May-16. */public class FirstWords {    public static void addingFirstWords(Context context)    {        TOEFL_DB db = TOEFL_DB.getInstance(context);        Type t1 = new Type();        t1.setName("Basic Words");        db.addType(t1);        Type t2 = new Type();        t2.setName("Food Crops");        db.addType(t2);        Word w1 = new Word("abandon", "թողնել");        db.addWord(w1);        db.addWordType(1, 1);        db.addWordType(1, 2);        Word w2 = new Word("adversely", "բացասաբար");        db.addWord(w2);        db.addWordType(2, 1);        db.addWordType(2, 2);        Word w3 = new Word("aggregate", "ժողովել");        db.addWord(w3);        db.addWordType(3, 1);        Word w4 = new Word("cultivation", "աճեցում");        db.addWord(w4);        db.addWordType(4, 1);        Word w5 = new Word("fertilize", "պարարտացնել");        db.addWord(w5);        db.addWordType(5, 1);        Word w6 = new Word("intensify", "ուժեղացնել");        db.addWord(w6);        db.addWordType(6, 1);        Word w7 = new Word("irrigation", "ոռոգում");        db.addWord(w7);        db.addWordType(7, 1);        Word w8 = new Word("obtain", "ստանալ");        db.addWord(w8);        db.addWordType(8, 1);        Word w9 = new Word("photosynthesis", "Ֆոտոսինթեզ");        db.addWord(w9);        db.addWordType(9, 1);        Word w10 = new Word("precipitation", "Երկրին հասնող ջուր");        db.addWord(w10);        db.addWordType(10, 1);    }}
