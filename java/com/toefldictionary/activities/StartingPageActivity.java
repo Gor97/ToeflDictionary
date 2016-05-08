@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.toefldictionary.CardViewAdapter;
+import com.toefldictionary.tools.CardViewAdapter;
 import com.toefldictionary.DB.TOEFL_DB;
 import com.toefldictionary.DB.executors.FirstWords;
 import com.toefldictionary.DB.executors.objects.Word;
@@ -45,7 +44,7 @@ public class StartingPageActivity extends AppCompatActivity
      //   Log.e("TOEFL", db.getAllSynonymsByWord(7).toString());
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CardViewAdapter(words);
+        adapter = new CardViewAdapter(words, this);
         recyclerView.setAdapter(adapter);
    //     Log.e("TOEFL", db.getAllWordByType(2).toString());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

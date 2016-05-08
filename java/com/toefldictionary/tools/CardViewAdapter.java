@@ -1,14 +1,17 @@
-package com.toefldictionary;
+package com.toefldictionary.tools;
 
 /**
  * Created by Gor on 04-May-16.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.R;
@@ -22,7 +25,9 @@ import java.util.ArrayList;
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
 
     private static ArrayList<Word> words;
-    public CardViewAdapter(ArrayList<Word> words) {
+    private Context c;
+    public CardViewAdapter(ArrayList<Word> words, Context context) {
+        this.c = context;
         this.words = words;
     }
 
@@ -37,11 +42,18 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(CardViewAdapter.ViewHolder viewHolder, int i) {
-
-        Word w = words.get(i);
+        final TTSManager ttsManager = new TTSManager();
+        ttsManager.init(c);
+        final Word w = words.get(i);
 
         viewHolder.nameText.setText(w.getName());
         viewHolder.transText.setText(w.getTranslation());
+        viewHolder.speech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ttsManager.initQueue(w.getName());
+            }
+        });
         viewHolder.w = w;
     }
 
@@ -54,6 +66,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
         public TextView nameText;
         public TextView transText;
+        public ImageButton speech;
         public Word w;
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -61,6 +74,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
                     .findViewById(R.id.nameText);
             transText = (TextView) itemLayoutView
                     .findViewById(R.id.transText);
+            speech = (ImageButton)itemLayoutView.findViewById(R.id.speech);
             itemLayoutView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
