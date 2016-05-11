@@ -33,9 +33,9 @@ public class WordPageActivity extends AppCompatActivity {
         wordText.setText(name);
         transText.setText(trans);
         synAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, TOEFL_DB.getInstance(this).getAllSynonymsByWord(w.getId()));
-   //     antAdapter = new ArrayAdapter(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, w.getAntonyms());
+        antAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, TOEFL_DB.getInstance(this).getAllAntonymsByWord(w.getId()));
         synonymsList.setAdapter(synAdapter);
-   //     antonymsList.setAdapter(antAdapter);
+        antonymsList.setAdapter(antAdapter);
     }
 
 }

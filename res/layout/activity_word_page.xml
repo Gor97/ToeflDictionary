@@ -35,7 +35,8 @@
         android:id="@+id/textView4"
         android:layout_below="@+id/clickedWordTrans"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="101dp" />
+        android:layout_marginTop="101dp"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +44,8 @@
         android:text="Antonyms"
         android:id="@+id/textView5"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_alignEnd="@+id/clickedWordTrans" />
+        android:layout_alignEnd="@+id/clickedWordTrans"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:orientation="horizontal"

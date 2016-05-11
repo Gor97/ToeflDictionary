@@ -1,9 +1,11 @@
 package com.toefldictionary.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,12 +43,11 @@ public class StartingPageActivity extends AppCompatActivity
         }
 
         words = db.getAllWordByType(1);
-     //   Log.e("TOEFL", db.getAllSynonymsByWord(7).toString());
+        Log.e("TOEFL", db.getAllTypes().toString());
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CardViewAdapter(words, this);
         recyclerView.setAdapter(adapter);
-   //     Log.e("TOEFL", db.getAllWordByType(2).toString());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
@@ -54,10 +55,11 @@ public class StartingPageActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(StartingPageActivity.this, AddWordPageActivity.class);
+                startActivity(i);
             }
         });
-
+       // Log.e("TOEFL", db.getAllSynonymsByWord(11).toString());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

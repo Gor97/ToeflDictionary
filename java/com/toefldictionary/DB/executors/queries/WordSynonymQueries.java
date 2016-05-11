@@ -53,24 +53,17 @@ public class WordSynonymQueries implements WordSynonymFunctionality {
     @Override
     public ArrayList<Word> getAllSynonymsByWord(int id) {
         ArrayList<Word> synonyms = new ArrayList<>();
-        Cursor cursor = database.query(WordSynonymTable.TABLE_NAME,
-                allColumns, null, null, null, null, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            if (cursor.getInt(0) == id) {
-                int neededID = cursor.getInt(1);
-                Word s = new Word();
-                Cursor c = database.rawQuery("select * from " + WordsTable.TABLE_NAME + " inner join " + WordSynonymTable.TABLE_NAME + " on " + WordsTable.COLUMN_ID + " = " + neededID, null);
-                c.moveToFirst();
-                s.setId(c.getInt(0));
-                s.setName(c.getString(1));
-                s.setTranslation(c.getString(2));
-                synonyms.add(s);
-                c.close();
-            }
-            cursor.moveToNext();
+        Cursor c = database.rawQuery("select id, word, translation from " + WordsTable.TABLE_NAME + " inner join " + WordSynonymTable.TABLE_NAME + " on " + WordSynonymTable.COLUMN_WORD_ID + " = " + id, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            Word s = new Word();
+            s.setId(c.getInt(0));
+            s.setName(c.getString(1));
+            s.setTranslation(c.getString(2));
+            synonyms.add(s);
+            c.moveToNext();
         }
-        cursor.close();
+        c.close();
         return synonyms;
     }
 }

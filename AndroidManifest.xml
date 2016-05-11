@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.WordPageActivity"></activity>
+        <activity android:name=".activities.WordPageActivity" />
+        <activity android:name=".activities.AddWordPageActivity"></activity>
     </application>
 
 </manifest>

@@ -52,25 +52,17 @@ public class WordAntonymQueries implements WordAntonymFunctionality {
     @Override
     public ArrayList<Word> getAllAntonymsByWord(int id) {
         ArrayList<Word> antonyms = new ArrayList<>();
-
-        Cursor cursor = database.query(WordAntonymTable.TABLE_NAME,
-                allColumns, null, null, null, null, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            if (cursor.getInt(0) == id) {
-                int neededID = cursor.getInt(1);
-                Word a = new Word();
-                Cursor c = database.rawQuery("select * from " + WordsTable.TABLE_NAME + " inner join " + WordAntonymTable.TABLE_NAME + " on " + WordsTable.COLUMN_ID + " = " + neededID, null);
-                c.moveToFirst();
-                a.setId(c.getInt(0));
-                a.setName(c.getString(1));
-                a.setTranslation(c.getString(2));
-                antonyms.add(a);
-                c.close();
-            }
-            cursor.moveToNext();
+        Cursor c = database.rawQuery("select * from " + WordsTable.TABLE_NAME + " inner join " + WordAntonymTable.TABLE_NAME + " on " + WordsTable.COLUMN_ID + " = " + id, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            Word a = new Word();
+            a.setId(c.getInt(0));
+            a.setName(c.getString(1));
+            a.setTranslation(c.getString(2));
+            antonyms.add(a);
+            c.moveToNext();
         }
-        cursor.close();
+        c.close();
         return antonyms;
     }
 
