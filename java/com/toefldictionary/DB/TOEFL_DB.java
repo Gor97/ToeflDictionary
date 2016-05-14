@@ -3,6 +3,7 @@ package com.toefldictionary.DB;
 import android.content.Context;
 import java.util.ArrayList;
 
+import com.toefldictionary.DB.executors.functionality.BlacklistFunctionality;
 import com.toefldictionary.DB.executors.functionality.WordAntonymFunctionality;
 import com.toefldictionary.DB.executors.functionality.DescriptionFunctionality;
 import com.toefldictionary.DB.executors.functionality.WordSynonymFunctionality;
@@ -12,6 +13,7 @@ import com.toefldictionary.DB.executors.functionality.WordFunctionality;
 import com.toefldictionary.DB.executors.functionality.WordTypeFunctionality;
 import com.toefldictionary.DB.executors.objects.Description;
 import com.toefldictionary.DB.executors.objects.Type;
+import com.toefldictionary.DB.executors.queries.BlacklistQueries;
 import com.toefldictionary.DB.executors.queries.WordAntonymQueries;
 import com.toefldictionary.DB.executors.queries.DescriptionQueries;
 import com.toefldictionary.DB.executors.queries.WordSynonymQueries;
@@ -25,7 +27,7 @@ import com.toefldictionary.DB.executors.queries.WordTypeQueries;
  * Created by Gor on 26-Apr-16.
  */
 public class TOEFL_DB implements WordFunctionality, WordSynonymFunctionality, WordAntonymFunctionality, DescriptionFunctionality,
-        TypeFunctionality, WordTypeFunctionality, WordDescriptionFunctionality{
+        TypeFunctionality, WordTypeFunctionality, WordDescriptionFunctionality, BlacklistFunctionality{
     private static WordQueries w_q;
     private static WordSynonymQueries s_q;
     private static WordAntonymQueries a_q;
@@ -33,6 +35,7 @@ public class TOEFL_DB implements WordFunctionality, WordSynonymFunctionality, Wo
     private static TypeQueries t_q;
     private static WordTypeQueries wt_q;
     private static WordDescriptionQueries wd_q;
+    private static BlacklistQueries b_q;
 
     private static TOEFL_DB db;
 
@@ -44,6 +47,7 @@ public class TOEFL_DB implements WordFunctionality, WordSynonymFunctionality, Wo
         t_q = new TypeQueries(context);
         wt_q = new WordTypeQueries(context);
         wd_q = new WordDescriptionQueries(context);
+        b_q = new BlacklistQueries(context);
     }
 
     public static TOEFL_DB getInstance(Context context) {
@@ -223,5 +227,21 @@ public class TOEFL_DB implements WordFunctionality, WordSynonymFunctionality, Wo
         ArrayList<Description> a = wd_q.getAllDesByWord(id);
         wd_q.close();
         return a;
+    }
+
+    @Override
+    public void addBlacklistWord(Word w) {
+        b_q.open();
+
+    }
+
+    @Override
+    public void deleteBlacklistWord(int id) {
+
+    }
+
+    @Override
+    public ArrayList<Word> getAllBlacklistWords() {
+        return null;
     }
 }

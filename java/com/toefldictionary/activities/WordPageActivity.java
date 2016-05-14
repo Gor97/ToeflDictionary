@@ -12,16 +12,20 @@ import com.toefldictionary.DB.TOEFL_DB;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.R;
 
+import java.util.ArrayList;
+
 public class WordPageActivity extends AppCompatActivity {
 
     private TextView wordText, transText;
     private ListView synonymsList, antonymsList;
-    private ArrayAdapter<Word> synAdapter;
-    private ArrayAdapter antAdapter;
+    private ArrayAdapter<String> synAdapter;
+    private ArrayAdapter<String> antAdapter;
+    private TOEFL_DB db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_page);
+        db = TOEFL_DB.getInstance(this);
         wordText = (TextView) findViewById(R.id.clickedWordText);
         transText = (TextView) findViewById(R.id.clickedWordTrans);
         synonymsList = (ListView) findViewById(R.id.synonymList);
@@ -32,8 +36,18 @@ public class WordPageActivity extends AppCompatActivity {
         String trans = w.getTranslation();
         wordText.setText(name);
         transText.setText(trans);
-        synAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, TOEFL_DB.getInstance(this).getAllSynonymsByWord(w.getId()));
-        antAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, TOEFL_DB.getInstance(this).getAllAntonymsByWord(w.getId()));
+        ArrayList<String> s = new ArrayList<>();
+        ArrayList<String> a = new ArrayList<>();
+        for(Word word : db.getAllSynonymsByWord(w.getId()))
+        {
+            s.add(word.getName());
+        }
+        for(Word word : db.getAllAntonymsByWord(w.getId()))
+        {
+            a.add(word.getName());
+        }
+        synAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.list_item, s);
+        antAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.list_item, a);
         synonymsList.setAdapter(synAdapter);
         antonymsList.setAdapter(antAdapter);
     }

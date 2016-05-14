@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.WordPageActivity" />
-        <activity android:name=".activities.AddWordPageActivity"></activity>
+        <activity android:name=".activities.AddWordPageActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.quiz.QuizSetupActivity" />
+        <activity android:name=".activities.quiz.QuizActivity" />
+        <activity android:name=".activities.quiz.QuizResultActivity"></activity>
     </application>
 
 </manifest>

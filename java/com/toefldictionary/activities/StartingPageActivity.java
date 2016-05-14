@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.toefldictionary.activities.quiz.QuizSetupActivity;
 import com.toefldictionary.tools.CardViewAdapter;
 import com.toefldictionary.DB.TOEFL_DB;
 import com.toefldictionary.DB.executors.FirstWords;
@@ -30,6 +31,8 @@ public class StartingPageActivity extends AppCompatActivity
     private TOEFL_DB db;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+    private boolean loading = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class StartingPageActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         db = TOEFL_DB.getInstance(this);
 
-        if(db.getAllWords() == null || db.getAllWords().size() == 0) {
+        if (db.getAllWords() == null || db.getAllWords().size() == 0) {
             FirstWords.addingFirstWords(this);
         }
 
@@ -48,8 +51,29 @@ public class StartingPageActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CardViewAdapter(words, this);
         recyclerView.setAdapter(adapter);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        final LinearLayoutManager mLayoutManager;
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int pastVisiblesItems, visibleItemCount, totalItemCount;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    visibleItemCount = mLayoutManager.getChildCount();
+                    totalItemCount = mLayoutManager.getItemCount();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                    if (loading) {
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                            loading = false;
+                        }
+                    }
+                }
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +83,7 @@ public class StartingPageActivity extends AppCompatActivity
                 startActivity(i);
             }
         });
-       // Log.e("TOEFL", db.getAllSynonymsByWord(11).toString());
+        Log.e("TOEFL", SettingsActivity.answerSwitchON + "");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,40 +109,24 @@ public class StartingPageActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.starting_page, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_mywords) {
-            // Handle the camera action
         } else if (id == R.id.nav_quiz) {
-
+            Intent i = new Intent(StartingPageActivity.this, QuizSetupActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_blacklist) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent i = new Intent(StartingPageActivity.this, SettingsActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_share) {
 
         }

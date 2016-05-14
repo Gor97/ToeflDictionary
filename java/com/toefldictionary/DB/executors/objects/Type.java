@@ -1,9 +1,11 @@
 package com.toefldictionary.DB.executors.objects;
 
+import java.io.Serializable;
+
 /**
  * Created by Gor on 27-Apr-16.
  */
-public class Type {
+public class Type implements Serializable{
     private int id;
     private String name;
 

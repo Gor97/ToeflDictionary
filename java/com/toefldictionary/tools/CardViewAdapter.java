@@ -42,18 +42,18 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(CardViewAdapter.ViewHolder viewHolder, int i) {
-        final TTSManager ttsManager = new TTSManager();
-        ttsManager.init(c);
+        //final TTSManager ttsManager = new TTSManager();
+       // ttsManager.init(c);
         final Word w = words.get(i);
 
         viewHolder.nameText.setText(w.getName());
         viewHolder.transText.setText(w.getTranslation());
-        viewHolder.speech.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.speech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ttsManager.initQueue(w.getName());
             }
-        });
+        });*/
         viewHolder.w = w;
     }
 
@@ -66,7 +66,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
         public TextView nameText;
         public TextView transText;
-        public ImageButton speech;
         public Word w;
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -74,7 +73,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
                     .findViewById(R.id.nameText);
             transText = (TextView) itemLayoutView
                     .findViewById(R.id.transText);
-            speech = (ImageButton)itemLayoutView.findViewById(R.id.speech);
             itemLayoutView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

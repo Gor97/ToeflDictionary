@@ -61,20 +61,20 @@ public class AddWordPageActivity extends AppCompatActivity {
                     w.setSynonyms(new ArrayList<>(Arrays.asList(synons)));
                     w.setAntonyms(new ArrayList<>(Arrays.asList(antons)));
                     w = db.addWord(w);
-                    db.addWordType(w.getId(),1);
+                    db.addWordType(w.getId(), 1);
                     for(String s:synons)
                     {
                         Word syn = new Word();
                         syn.setName(s);
                         syn.setTranslation(trans.getText().toString());
-                        db.addWord(syn);
+                        syn = db.addWord(syn);
                         db.addWordSynonym(w.getId(), syn.getId());
                     }
                     for(String a:antons)
                     {
                         Word ant = new Word();
                         ant.setName(a);
-                        db.addWord(ant);
+                        ant = db.addWord(ant);
                         db.addWordAntonym(w.getId(), ant.getId());
                     }
                     Intent i = new Intent(AddWordPageActivity.this, StartingPageActivity.class);

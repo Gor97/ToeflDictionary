@@ -18,11 +18,10 @@ import java.util.ArrayList;
  */
 public class BlacklistQueries implements BlacklistFunctionality {
 
-    private String[] allColumns = {BlacklistTable.COLUMN_WORD_ID, BlacklistTable.COLUMN_BLACKLIST_WORD, BlacklistTable.COLUMN_BLACKLIST_WORD_COUNTER};
+    private String[] allColumns = {BlacklistTable.COLUMN_WORD_ID, BlacklistTable.COLUMN_BLACKLIST_WORD};
     private SQLiteDatabase database;
     private DBHelper dbHelper;
     private Context context;
-    private int counter = 1;
     public BlacklistQueries(Context context) {
         dbHelper = new DBHelper(context);
         this.context = context;
@@ -39,7 +38,6 @@ public class BlacklistQueries implements BlacklistFunctionality {
     public void addBlacklistWord(Word w) {
         ContentValues values = new ContentValues();
         values.put(BlacklistTable.COLUMN_WORD_ID, w.getName());
-        values.put(BlacklistTable.COLUMN_BLACKLIST_WORD_COUNTER, counter);
         database.insert(BlacklistTable.TABLE_NAME, null, values);
     }
 
