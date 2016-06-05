@@ -1,41 +1,33 @@
 package com.toefldictionary.tools;
 
-/**
- * Created by Gor on 04-May-16.
- */
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.toefldictionary.DB.TOEFL_DB;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.R;
-import com.toefldictionary.activities.WordPageActivity;
 
 import java.util.ArrayList;
 
-public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
+/**
+ * Created by Gor on 21-May-16.
+ */
+public class CardViewAdapter2 extends RecyclerView.Adapter<CardViewAdapter2.ViewHolder> {
 
     private static ArrayList<Word> words;
     private TTSManager ttsManager;
     private Context c;
-    public CardViewAdapter(ArrayList<Word> words, Context context) {
+    public CardViewAdapter2(ArrayList<Word> words, Context context) {
         this.c = context;
         this.words = words;
         ttsManager = new TTSManager();
@@ -44,7 +36,9 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
 
     @Override
-    public CardViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public CardViewAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        /*View itemLayoutView = LayoutInflater.from(viewGroup.getContext()).inflate(
+                R.layout.card_view, null);*/
         View itemLayoutView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view, null, true);
         WindowManager windowManager = (WindowManager)c.getSystemService(Context.WINDOW_SERVICE);
         int width = windowManager.getDefaultDisplay().getWidth();
@@ -54,7 +48,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(CardViewAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(CardViewAdapter2.ViewHolder viewHolder, int i) {
         final Word w = words.get(i);
 
         viewHolder.nameText.setText(w.getName());

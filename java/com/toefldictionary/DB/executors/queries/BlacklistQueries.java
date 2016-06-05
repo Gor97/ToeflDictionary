@@ -10,6 +10,7 @@ import com.toefldictionary.DB.DBHelper;
 import com.toefldictionary.DB.executors.functionality.BlacklistFunctionality;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.DB.tables.BlacklistTable;
+import com.toefldictionary.DB.tables.WordsTable;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  */
 public class BlacklistQueries implements BlacklistFunctionality {
 
-    private String[] allColumns = {BlacklistTable.COLUMN_WORD_ID, BlacklistTable.COLUMN_BLACKLIST_WORD};
+    private String[] allColumns = {BlacklistTable.COLUMN_WORD_ID, BlacklistTable.COLUMN_BLACKLIST_WORD_ID};
     private SQLiteDatabase database;
     private DBHelper dbHelper;
     private Context context;
@@ -35,10 +36,28 @@ public class BlacklistQueries implements BlacklistFunctionality {
     }
 
     @Override
-    public void addBlacklistWord(Word w) {
-        ContentValues values = new ContentValues();
-        values.put(BlacklistTable.COLUMN_WORD_ID, w.getName());
-        database.insert(BlacklistTable.TABLE_NAME, null, values);
+    public void addBlacklistWord(int id) {
+        boolean alreadyTaken = false;
+        Cursor c = database.query(BlacklistTable.TABLE_NAME,
+                allColumns, null, null, null, null, null);
+        c.moveToFirst();
+        while(!c.isAfterLast())
+        {
+            if(c.getInt(1) == id) {
+                alreadyTaken = true;
+            }
+        }
+        c.close();
+        if(!alreadyTaken) {
+            ContentValues values = new ContentValues();
+            values.put(BlacklistTable.COLUMN_BLACKLIST_WORD_ID, id);
+            database.insert(BlacklistTable.TABLE_NAME, null, values);
+            long insertId = database.insert(BlacklistTable.TABLE_NAME, null, values);
+            Cursor cursor = database.query(BlacklistTable.TABLE_NAME, allColumns, BlacklistTable.COLUMN_WORD_ID + " = " + insertId, null, null, null, null);
+            cursor.moveToFirst();
+            cursorToBlacklistWord(cursor);
+            cursor.close();
+        }
     }
 
     @Override
@@ -56,9 +75,7 @@ public class BlacklistQueries implements BlacklistFunctionality {
     @Override
     public ArrayList<Word> getAllBlacklistWords() {
         ArrayList<Word> words = new ArrayList<>();
-        Cursor cursor = database.query(BlacklistTable.TABLE_NAME,
-                allColumns, null, null, null, null, null);
-
+        Cursor cursor = database.rawQuery("select * from " + WordsTable.TABLE_NAME + " where " + WordsTable.COLUMN_ID + " = " + BlacklistTable.COLUMN_BLACKLIST_WORD_ID, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Word w = cursorToBlacklistWord(cursor);

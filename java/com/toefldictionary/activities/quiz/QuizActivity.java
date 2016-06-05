@@ -1,6 +1,7 @@
 package com.toefldictionary.activities.quiz;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +17,7 @@ import com.toefldictionary.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class QuizActivity extends AppCompatActivity {
     private Button answer1, answer2, answer3, answer4;
@@ -36,6 +33,7 @@ public class QuizActivity extends AppCompatActivity {
     private Type t;
     private TOEFL_DB db;
     private ArrayList<Word> rightAnswers, wrongAnswers, words;
+    private ArrayList<Integer> wordIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +41,20 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         setTitle("QUIZ");
         Intent intent = getIntent();
-        t = (Type) intent.getExtras().get("type");
-        questionsCount = (int) intent.getExtras().get("count");
-        question = (TextView) findViewById(R.id.questionText);
-        answer1 = (Button) findViewById(R.id.answer1);
-        answer2 = (Button) findViewById(R.id.answer2);
-        answer3 = (Button) findViewById(R.id.answer3);
-        answer4 = (Button) findViewById(R.id.answer4);
+        db = TOEFL_DB.getInstance(this);
+        int a = (int) intent.getExtras().get("type");
+        t = db.getAllTypes().get(a);
+        questionsCount = 5;
+        words = db.getAllWordByType(t.getId());
         rightAnswers = new ArrayList<>();
         wrongAnswers = new ArrayList<>();
-        counterText = (TextView) findViewById(R.id.counterText);
+        question = (TextView) findViewById(R.id.questionText);
+        counterText = (TextView)findViewById(R.id.counterText);
+        answer1 = (Button)findViewById(R.id.answer1);
+        answer2 = (Button)findViewById(R.id.answer2);
+        answer3 = (Button)findViewById(R.id.answer3);
+        answer4 = (Button)findViewById(R.id.answer4);
+
         assert counterText != null;
         counterText.setText(index + "/" + questionsCount);
         pairs = new ArrayList<>();
@@ -61,14 +63,17 @@ public class QuizActivity extends AppCompatActivity {
         options.add(answer2);
         options.add(answer3);
         options.add(answer4);
-        db = TOEFL_DB.getInstance(this);
-        words = db.getAllWordByType(t.getId());
-        Collections.shuffle(words);
-        Collections.shuffle(words);
+        wordIndex = new ArrayList<>();
+        for(int i = 0 ; i < words.size(); i++)
+        {
+            wordIndex.add(words.get(i).getId());
+        }
+        Collections.shuffle(wordIndex);
+        Collections.shuffle(wordIndex);
         for (int i = 0; i < questionsCount; i++) {
             Question_Answer qa = new Question_Answer();
-            qa.setQuestion(words.get(i).getName());
-            qa.setAnswer(words.get(i).getTranslation());
+            qa.setQuestion(db.getAllWords().get(wordIndex.get(i)).getName());
+            qa.setAnswer(db.getAllWords().get(wordIndex.get(i)).getTranslation());
             pairs.add(qa);
         }
         Collections.shuffle(pairs);
@@ -76,7 +81,7 @@ public class QuizActivity extends AppCompatActivity {
         goToNextQuestion();
     }
 
-    public void choose(View v) {
+    public void choose(View v) throws InterruptedException {
         switch (v.getId()) {
             case R.id.answer1:
                 if (correctAnswer == 0) {
@@ -100,6 +105,7 @@ public class QuizActivity extends AppCompatActivity {
                 break;
             case R.id.answer3:
                 if (correctAnswer == 2) {
+
                     rightAnswers.add(new Word(pairs.get(nextQuestion).getQuestion(), pairs.get(nextQuestion).getAnswer()));
                     counter++;
                 }
@@ -121,7 +127,7 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    public void goToNextQuestion() {
+   public void goToNextQuestion() {
         if(nextQuestion == questionsCount - 1)
         {
             Toast.makeText(QuizActivity.this,  "Quiz ended", Toast.LENGTH_SHORT).show();
@@ -131,6 +137,7 @@ public class QuizActivity extends AppCompatActivity {
             i.putExtra("rightAnswers", rightAnswers);
             i.putExtra("wrongAnswers", wrongAnswers);
             startActivity(i);
+            finish();
         }
         else {
             nextQuestion++;
@@ -140,18 +147,15 @@ public class QuizActivity extends AppCompatActivity {
             correctAnswer = r.nextInt(4);
             options.get(correctAnswer).setText(pairs.get(nextQuestion).getAnswer() + "");
             ArrayList<Integer> numbers = new ArrayList<>();
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < words.size(); i++)
             {
-                if(i != correctAnswer)
-                {
-                    numbers.add(i);
-                }
+                numbers.add(i);
             }
             Collections.shuffle(numbers);
             Collections.shuffle(numbers);
             for (int i = 0; i < 4; i++) {
                 if (i != correctAnswer) {
-                    options.get(i).setText(db.getAllWordByType(t.getId()).get(numbers.get(i)).getTranslation());
+                    options.get(i).setText(words.get(numbers.get(i)).getTranslation());
                 } else {
                     continue;
                 }

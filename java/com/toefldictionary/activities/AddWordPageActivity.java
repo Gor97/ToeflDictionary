@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 
 public class AddWordPageActivity extends AppCompatActivity {
 
-    private EditText word, trans, antonyms, synonyms, description;
+    private EditText word, trans, antonyms, synonyms;
     private String[] antons, synons;
     private Button save;
     private TOEFL_DB db;
@@ -31,10 +32,12 @@ public class AddWordPageActivity extends AppCompatActivity {
         trans = (EditText) findViewById(R.id.newWordTransEdit);
         antonyms = (EditText) findViewById(R.id.newWordAntonEdit);
         synonyms = (EditText) findViewById(R.id.newWordSynonEdit);
-        description = (EditText) findViewById(R.id.newWordDescription);
         save = (Button) findViewById(R.id.saveButton);
         db = TOEFL_DB.getInstance(this);
-
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +47,6 @@ public class AddWordPageActivity extends AppCompatActivity {
                     word.setError("Enter the Word");
                 } else if (trans.getText().toString().equals("")) {
                     trans.setError("Enter Translation");
-                } else if (description.getText().toString().equals("")) {
-                    description.setError("Enter Description");
                 } else {
                     if(! synonyms.getText().toString().equals(""))
                     {
@@ -56,12 +57,10 @@ public class AddWordPageActivity extends AppCompatActivity {
                         antons = antonyms.getText().toString().split(" ");
                     }
                     Word w = new Word(word.getText().toString(), trans.getText().toString());
-                    Description d = new Description();
-                    d.setText(description.getText().toString());
                     w.setSynonyms(new ArrayList<>(Arrays.asList(synons)));
                     w.setAntonyms(new ArrayList<>(Arrays.asList(antons)));
                     w = db.addWord(w);
-                    db.addWordType(w.getId(), 1);
+                    db.addWordType(w.getId(), 42);
                     for(String s:synons)
                     {
                         Word syn = new Word();
@@ -77,10 +76,17 @@ public class AddWordPageActivity extends AppCompatActivity {
                         ant = db.addWord(ant);
                         db.addWordAntonym(w.getId(), ant.getId());
                     }
-                    Intent i = new Intent(AddWordPageActivity.this, StartingPageActivity.class);
+                    Intent i = new Intent(AddWordPageActivity.this, MyWordsPageActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
         });
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

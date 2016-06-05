@@ -62,10 +62,6 @@ public class Word implements Serializable {
 
     @Override
     public String toString() {
-        return "Word{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", translation='" + translation + '\'' +
-                '}';
+        return name;
     }
 }

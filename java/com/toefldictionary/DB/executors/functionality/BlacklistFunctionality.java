@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Gor on 27-Apr-16.
  */
 public interface BlacklistFunctionality {
-    void addBlacklistWord(Word w);
+    void addBlacklistWord(int id);
     void deleteBlacklistWord(int id);
     ArrayList<Word> getAllBlacklistWords();
 }

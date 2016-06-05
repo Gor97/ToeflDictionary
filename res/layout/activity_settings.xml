@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quiz"
+        android:text="Translate"
         android:id="@+id/textView11"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -24,15 +24,38 @@
         android:background="@android:color/darker_gray"
         android:id="@+id/view" />
 
-    <Switch
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Questions with Answers"
-        android:id="@+id/answerSwitch"
-        android:layout_alignTop="@+id/view"
+        android:id="@+id/translateEdit"
+        android:layout_below="@+id/view"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:checked="false"
-        android:textSize="20dp" />
+        android:layout_alignEnd="@+id/view"
+        android:hint="Write here" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/translationText"
+        android:layout_below="@+id/translateEdit"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/translateEdit" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/translationText"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_marginBottom="79dp" />
 
 </RelativeLayout>

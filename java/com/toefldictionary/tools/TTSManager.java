@@ -11,7 +11,7 @@ import java.util.Locale;
  */
 public class TTSManager {
 
-    private TextToSpeech mTts = null;
+    private static TextToSpeech mTts;
     private boolean isLoaded = false;
 
     public void init(Context context) {
@@ -38,7 +38,7 @@ public class TTSManager {
         }
     };
 
-    public void shutDown() {
+    public static void shutDown() {
         mTts.shutdown();
     }
 

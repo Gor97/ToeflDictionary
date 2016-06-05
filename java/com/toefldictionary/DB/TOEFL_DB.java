@@ -230,18 +230,24 @@ public class TOEFL_DB implements WordFunctionality, WordSynonymFunctionality, Wo
     }
 
     @Override
-    public void addBlacklistWord(Word w) {
+    public void addBlacklistWord(int id) {
         b_q.open();
-
+        b_q.addBlacklistWord(id);
+        b_q.close();
     }
 
     @Override
     public void deleteBlacklistWord(int id) {
-
+        b_q.open();
+        b_q.deleteBlacklistWord(id);
+        b_q.close();
     }
 
     @Override
     public ArrayList<Word> getAllBlacklistWords() {
-        return null;
+        b_q.open();
+        ArrayList<Word> b = b_q.getAllBlacklistWords();
+        b_q.close();
+        return b;
     }
 }
