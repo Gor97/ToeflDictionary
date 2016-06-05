@@ -53,7 +53,6 @@ public class WordSynonymQueries implements WordSynonymFunctionality {
     @Override
     public ArrayList<Word> getAllSynonymsByWord(int id) {
         ArrayList<Word> synonyms = new ArrayList<>();
-        //Cursor c = database.rawQuery("select id, word, translation from " + WordsTable.TABLE_NAME + " inner join " + WordSynonymTable.TABLE_NAME + " on " + WordSynonymTable.COLUMN_WORD_ID + " = " + id,  null);
         Cursor c = database.rawQuery("SELECT W2.id,\n" +
                 "       W2.word,\n" +
                 "       W2.translation\n" +

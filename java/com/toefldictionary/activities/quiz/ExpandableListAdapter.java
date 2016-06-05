@@ -106,6 +106,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     public void onClick(final View v) {
                         AlertDialog alertDialog = new AlertDialog.Builder(c).create();
                         alertDialog.setTitle(itemTextView.getText().toString());
+                        alertDialog.setIcon(R.mipmap.ic_launcher);
                         alertDialog.setMessage("Are you sure you want to start quiz?");
                         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
                                 new DialogInterface.OnClickListener() {
@@ -191,9 +192,6 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public int type;
         public String text;
         public List<Item> invisibleChildren;
-
-        public Item() {
-        }
 
         public Item(int type, String text) {
             this.type = type;

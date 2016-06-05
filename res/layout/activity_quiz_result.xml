@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="16dp"
     android:layout_height="match_parent"
     tools:context="com.toefldictionary.activities.quiz.QuizResultActivity">
 
@@ -43,5 +44,6 @@
         android:layout_height="250dp"
         android:id="@+id/wrongList"
         android:layout_below="@+id/textView15"
-        android:layout_alignEnd="@+id/rightList" />
+        android:layout_alignEnd="@+id/rightList"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

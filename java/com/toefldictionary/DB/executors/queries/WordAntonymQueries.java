@@ -71,5 +71,4 @@ public class WordAntonymQueries implements WordAntonymFunctionality {
         c.close();
         return antonyms;
     }
-
 }

@@ -25,6 +25,9 @@
         <activity android:name=".activities.quiz.QuizActivity" />
         <activity android:name=".activities.quiz.QuizResultActivity" />
         <activity android:name=".activities.MyWordsPageActivity" />
+
+        <receiver android:name=".tools.service.Receiver"/>
+        <service android:name=".tools.service.Service"/>
     </application>
 
 </manifest>

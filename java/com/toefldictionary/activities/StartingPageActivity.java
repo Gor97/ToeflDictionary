@@ -1,10 +1,14 @@
 package com.toefldictionary.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +26,7 @@ import com.toefldictionary.DB.TOEFL_DB;
 import com.toefldictionary.DB.executors.FirstWords;
 import com.toefldictionary.DB.executors.objects.Word;
 import com.toefldictionary.R;
+import com.toefldictionary.tools.service.Receiver;
 
 import java.util.ArrayList;
 
@@ -128,7 +133,7 @@ public class StartingPageActivity extends AppCompatActivity
             Intent i = new Intent(StartingPageActivity.this, SettingsActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_share) {
-
+            Log.e("TAG", TOEFL_DB.getInstance(this).getAllSynonymsByWord(1).toString());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,6 +141,12 @@ public class StartingPageActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
 
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
 }

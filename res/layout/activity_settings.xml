@@ -16,13 +16,15 @@
         android:id="@+id/textView11"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textColor="#000000" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/textView11"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/black"
         android:id="@+id/view" />
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,32 +32,91 @@
         android:id="@+id/translateEdit"
         android:layout_below="@+id/view"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/view"
-        android:hint="Write here" />
+        android:hint="Write here"
+        android:layout_toStartOf="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Translate"
+        android:id="@+id/button"
+        style="?android:attr/borderlessButtonStyle"
+
+        android:layout_below="@+id/view"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/translationText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Reminder"
+        android:id="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/translateEdit" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textView"
+        android:background="@android:color/black"
+        android:id="@+id/view2"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/layout"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view2"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/timeButton"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/dateButton"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/layout"
+        android:background="@android:color/black"
+        android:id="@+id/view3"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remind"
+        android:id="@+id/remindButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_below="@+id/view3"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/view3" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/remindButton"
+        android:background="@android:color/black"
+        android:id="@+id/view4"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Translation"
         android:id="@+id/translationText"
         android:layout_below="@+id/translateEdit"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/translateEdit" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/translationText"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/view1"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/textView11"
-        android:layout_marginBottom="79dp" />
+        android:layout_toStartOf="@+id/button" />
 
 </RelativeLayout>

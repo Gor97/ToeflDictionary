@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,6 +23,10 @@ public class QuizResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_result);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         Intent i = getIntent();
         rightList = (ListView) findViewById(R.id.rightList);
         wrongList = (ListView) findViewById(R.id.wrongList);
@@ -42,5 +47,15 @@ public class QuizResultActivity extends AppCompatActivity {
         wrongAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.list_item, s2);
         rightList.setAdapter(rightAdapter);
         wrongList.setAdapter(wrongAdapter);
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
