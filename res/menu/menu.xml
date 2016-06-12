@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:showAsAction="always"
+        android:title="Lesson 1">
+    </item>
+    <item
+        android:id="@+id/item2"
+        android:showAsAction="always"
+        android:title="Lesson 2">
+    </item>
+    <item
+        android:id="@+id/item3"
+        android:showAsAction="always"
+        android:title="Lesson 3">
+    </item>
+    <item
+        android:id="@+id/item4"
+        android:showAsAction="always"
+        android:title="Lesson 4">
+    </item>
+    <item
+        android:id="@+id/item5"
+        android:showAsAction="always"
+        android:title="Lesson 5">
+    </item>
+    <item
+        android:id="@+id/item6"
+        android:showAsAction="always"
+        android:title="Lesson 6">
+    </item>
+    <item
+        android:id="@+id/item7"
+        android:showAsAction="always"
+        android:title="Lesson 7">
+    </item>
+    <item
+        android:id="@+id/item8"
+        android:showAsAction="always"
+        android:title="Lesson 8">
+    </item>
+    <item
+        android:id="@+id/item9"
+        android:showAsAction="always"
+        android:title="Lesson 9">
+    </item>
+    <item
+        android:id="@+id/item10"
+        android:showAsAction="always"
+        android:title="Lesson 10">
+    </item>
+    <item
+        android:id="@+id/item11"
+        android:showAsAction="always"
+        android:title="Lesson 11">
+    </item>
+    <item
+        android:id="@+id/item12"
+        android:showAsAction="always"
+        android:title="Lesson 12">
+    </item>
+    <item
+        android:id="@+id/item13"
+        android:showAsAction="always"
+        android:title="Lesson 13">
+    </item>
+    <item
+        android:id="@+id/item14"
+        android:showAsAction="always"
+        android:title="Lesson 14">
+    </item>
+    <item
+        android:id="@+id/item15"
+        android:showAsAction="always"
+        android:title="Lesson 15">
+    </item>
+    <item
+        android:id="@+id/item16"
+        android:showAsAction="always"
+        android:title="Lesson 16">
+    </item>
+    <item
+        android:id="@+id/item17"
+        android:showAsAction="always"
+        android:title="Lesson 17">
+    </item>
+    <item
+        android:id="@+id/item18"
+        android:showAsAction="always"
+        android:title="Lesson 18">
+    </item>
+    <item
+        android:id="@+id/item19"
+        android:showAsAction="always"
+        android:title="Lesson 19">
+    </item>
+    <item
+        android:id="@+id/item20"
+        android:showAsAction="always"
+        android:title="Lesson 20">
+    </item>
+    <item
+        android:id="@+id/item21"
+        android:showAsAction="always"
+        android:title="Lesson 21">
+    </item>
+    <item
+        android:id="@+id/item22"
+        android:showAsAction="always"
+        android:title="Lesson 22">
+    </item>
+    <item
+        android:id="@+id/item23"
+        android:showAsAction="always"
+        android:title="Lesson 23">
+    </item>
+    <item
+        android:id="@+id/item24"
+        android:showAsAction="always"
+        android:title="Lesson 24">
+    </item>
+    <item
+        android:id="@+id/item25"
+        android:showAsAction="always"
+        android:title="Lesson 25">
+    </item>
+    <item
+        android:id="@+id/item26"
+        android:showAsAction="always"
+        android:title="Lesson 26">
+    </item>
+    <item
+        android:id="@+id/item27"
+        android:showAsAction="always"
+        android:title="Lesson 27">
+    </item>
+    <item
+        android:id="@+id/item28"
+        android:showAsAction="always"
+        android:title="Lesson 28">
+    </item>
+    <item
+        android:id="@+id/item29"
+        android:showAsAction="always"
+        android:title="Lesson 29">
+    </item>
+    <item
+        android:id="@+id/item30"
+        android:showAsAction="always"
+        android:title="Lesson 30">
+    </item>
+    <item
+        android:id="@+id/item31"
+        android:showAsAction="always"
+        android:title="Lesson 31">
+    </item>
+    <item
+        android:id="@+id/item32"
+        android:showAsAction="always"
+        android:title="Lesson 32">
+    </item>
+    <item
+        android:id="@+id/item33"
+        android:showAsAction="always"
+        android:title="Lesson 33">
+    </item>
+    <item
+        android:id="@+id/item34"
+        android:showAsAction="always"
+        android:title="Lesson 34">
+    </item>
+    <item
+        android:id="@+id/item35"
+        android:showAsAction="always"
+        android:title="Lesson 35">
+    </item>
+    <item
+        android:id="@+id/item36"
+        android:showAsAction="always"
+        android:title="Lesson 36">
+    </item>
+    <item
+        android:id="@+id/item37"
+        android:showAsAction="always"
+        android:title="Lesson 37">
+    </item>
+    <item
+        android:id="@+id/item38"
+        android:showAsAction="always"
+        android:title="Lesson 38">
+    </item>
+    <item
+        android:id="@+id/item39"
+        android:showAsAction="always"
+        android:title="Lesson 39">
+    </item>
+    <item
+        android:id="@+id/item40"
+        android:showAsAction="always"
+        android:title="Lesson 40">
+    </item>
+
+</menu>

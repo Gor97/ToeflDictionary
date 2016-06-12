@@ -49,7 +49,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Reminder"
         android:id="@+id/textView"
@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Translation"
+        android:text="Translation here"
         android:id="@+id/translationText"
         android:layout_below="@+id/translateEdit"
         android:layout_alignParentStart="true"

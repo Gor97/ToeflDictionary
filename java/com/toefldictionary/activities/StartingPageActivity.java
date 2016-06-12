@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.toefldictionary.activities.quiz.QuizSetupActivity;
 import com.toefldictionary.tools.CardViewAdapter;
@@ -141,12 +143,78 @@ public class StartingPageActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                recyclerView.smoothScrollToPosition(0);
+                return true;
+            case R.id.item2:
+                recyclerView.smoothScrollToPosition(10);
+                return true;
+            case R.id.item3:
+                recyclerView.smoothScrollToPosition(20);
+                return true;
+            case R.id.item4:
+                recyclerView.smoothScrollToPosition(30);
+                return true;
+            case R.id.item5:
+                recyclerView.smoothScrollToPosition(40);
+                return true;
+            case R.id.item6:
+                recyclerView.smoothScrollToPosition(50);
+                return true;
+            case R.id.item7:
+                recyclerView.smoothScrollToPosition(60);
+                return true;
+            case R.id.item8:
+                recyclerView.smoothScrollToPosition(70);
+                return true;
+            case R.id.item9:
+                recyclerView.smoothScrollToPosition(80);
+                return true;
+            case R.id.item10:
+                recyclerView.smoothScrollToPosition(90);
+                return true;
+            case R.id.item11:
+                recyclerView.smoothScrollToPosition(100);
+                return true;
+            case R.id.item12:
+                recyclerView.smoothScrollToPosition(110);
+                return true;
+            case R.id.item13:
+                recyclerView.smoothScrollToPosition(120);
+                return true;
+            case R.id.item14:
+                recyclerView.smoothScrollToPosition(130);
+                return true;
+            case R.id.item15:
+                recyclerView.smoothScrollToPosition(140);
+                return true;
+            case R.id.item16:
+                recyclerView.smoothScrollToPosition(150);
+                return true;
+            case R.id.item17:
+                recyclerView.smoothScrollToPosition(160);
+                return true;
+            case R.id.item18:
+                recyclerView.smoothScrollToPosition(170);
+                return true;
+            case R.id.item19:
+                recyclerView.smoothScrollToPosition(180);
+                return true;
+            case R.id.item20:
+                recyclerView.smoothScrollToPosition(190);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }
